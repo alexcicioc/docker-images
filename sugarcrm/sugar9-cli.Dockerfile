@@ -34,4 +34,3 @@ RUN docker-php-ext-install mysqli \
     && pecl install xdebug-2.7.0beta1 \
     && pecl install redis \
     && docker-php-ext-enable redis
-

@@ -1,6 +1,4 @@
-FROM alexcicioc/php:7.3-apache-composer-mysql
-
-COPY apache-confs /etc/apache2/
+FROM alexcicioc/php:7.4-apache-composer-mysql
 
 # Generate oauth keys
 WORKDIR /app/keys
