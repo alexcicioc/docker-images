@@ -1,0 +1,10 @@
+#!/bin/bash
+set -ex \
+    && . "/etc/apache2/envvars" \
+    && ln -sfT /dev/stderr "$APACHE_LOG_DIR/error.log" \
+    && ln -sfT /dev/stdout "$APACHE_LOG_DIR/access.log" \
+    && ln -sfT /dev/stdout "$APACHE_LOG_DIR/other_vhosts_access.log" \
+    && a2enmod headers expires deflate rewrite \
+    && sed -i "s#Timeout .*#Timeout 600#" /etc/apache2/apache2.conf \
+    && a2dissite 000-default \
+    && a2ensite sugar

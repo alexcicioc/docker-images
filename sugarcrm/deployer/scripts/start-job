@@ -3,5 +3,6 @@ set -e
 
 echo "Copying files to the volume"
 rsync -a /sugar/. /sugar_mount --delete-after
-
+echo "Running quick repair and rebuild"
+quick-repair-and-rebuild
 exec "$@"

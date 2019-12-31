@@ -1,4 +1,4 @@
-FROM alexcicioc/sugar-cli:9-v1.0
+FROM sugarprojects/sugar-php-cli:9-v1.1
 
 RUN mkdir /sugar
 

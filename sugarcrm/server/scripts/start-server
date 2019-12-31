@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+echo "Creating user group id=$CURRENT_USER_GROUP_ID and group name=$APACHE_RUN_GROUP"
+groupadd -g "$CURRENT_USER_GROUP_ID" "$APACHE_RUN_GROUP" || true
+
+echo "Creating user with id=$CURRENT_USER_ID name=$APACHE_RUN_USER"
+useradd -u "$CURRENT_USER_ID" -g "$CURRENT_USER_GROUP_ID" "$APACHE_RUN_USER" || true
+
+echo "Changing session.save_path config to $REDIS_CONNECTION"
+echo "session.save_path = $REDIS_CONNECTION" >> /usr/local/etc/php/conf.d/docker.ini
+exec apache2-foreground "$@"

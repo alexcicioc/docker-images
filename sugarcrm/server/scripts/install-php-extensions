@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker-php-ext-install mysqli \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install gmp \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install imap \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install ldap \
+    && pecl install xdebug-2.7.0beta1 \
+    && pecl install redis \
+    && docker-php-ext-enable redis

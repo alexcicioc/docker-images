@@ -21,7 +21,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 #========================
 # Install CI Utilities
 #========================
-COPY karma/install-ci-utils.sh /opt/bin/install-ci-utils.sh
+COPY ./scripts/install-ci-utils.sh /opt/bin/install-ci-utils.sh
 RUN chmod +x /opt/bin/install-ci-utils.sh && \
     /opt/bin/install-ci-utils.sh
 
@@ -29,7 +29,7 @@ RUN chmod +x /opt/bin/install-ci-utils.sh && \
 # Install Graphical Support and Browsers
 #========================
 ENV FIREFOX_VERSION 59.0.2
-COPY karma/install-web-browsers.sh /opt/bin/install-web-browsers.sh
+COPY ./scripts/install-web-browsers.sh /opt/bin/install-web-browsers.sh
 RUN chmod +x /opt/bin/install-web-browsers.sh && \
     /opt/bin/install-web-browsers.sh
 
@@ -58,13 +58,13 @@ EXPOSE 5900
 #========================
 # Add Karma Cleanup Script
 #========================
-COPY karma/Karma.Cleanup.sh /opt/bin/cleanup.sh
+COPY ./scripts/Karma.Cleanup.sh /opt/bin/cleanup.sh
 RUN chmod +x /opt/bin/cleanup.sh
 
 #========================
 # Setup Entry Point
 #========================
-COPY karma/Karma.Entrypoint.sh /opt/bin/entry_point.sh
+COPY ./scripts/Karma.Entrypoint.sh /opt/bin/entry_point.sh
 RUN chmod +x /opt/bin/entry_point.sh
 
 ENTRYPOINT ["/opt/bin/entry_point.sh"]
