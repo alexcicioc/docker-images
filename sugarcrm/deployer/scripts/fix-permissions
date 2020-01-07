@@ -1,6 +1,13 @@
 #!/bin/bash
 echo "Applying ownership to $SUGAR_USER_ID:$SUGAR_GROUP_ID"
-chown -R "$SUGAR_USER_ID:$SUGAR_GROUP_ID" /sugar
+
+find . -noleaf \( \! -user "$SUGAR_USER_ID" -o \! -group "$SUGAR_GROUP_ID" \) -print0 | xargs -0 -r chown "$SUGAR_USER_ID:$SUGAR_GROUP_ID"
+
+echo "Setting directory permissions to 775"
+find . -noleaf -type d \! -perm 775 -print0 2> /dev/null | xargs -0 -r chmod 775 2> /dev/null
+
+echo "Setting file permissions to 664"
+find . -noleaf -type f \! -name phpunit \! -name sugarcrm \! -perm 664 -print0 2> /dev/null | xargs -0 -r chmod 664 2> /dev/null
 
 if [ -e ./bin/sugarcrm ]
 then
@@ -10,5 +17,3 @@ if [ -e ./vendor/phpunit/phpunit/phpunit ]
 then
     chmod 700 ./vendor/phpunit/phpunit/phpunit
 fi
-find . -type d -exec chmod 775 {} \;
-find . -type f ! -name phpunit ! -name sugarcrm -exec chmod 664 {} \;
