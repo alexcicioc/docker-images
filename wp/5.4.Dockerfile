@@ -6,7 +6,8 @@ RUN apt-get install -y --no-install-recommends \
 		libfreetype6-dev \
 		libjpeg-dev \
 		libmagickwand-dev \
-		libpng-dev
+		libpng-dev \
+		vi nano
 RUN docker-php-ext-install mysqli pdo_mysql bcmath exif gd zip
 
 # Enable apache rewrites and copy custom apache config
